@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { ArrowDown, ArrowUpRight } from 'lucide-react';
 import C3Hero3D from './C3Hero3D';
 import GlowCaret from './GlowCaret';
+import { Link } from "react-router-dom";
 
 const PHRASES = [
   'initializing community...',
@@ -176,28 +177,34 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 1.6 }}
             >
-              <a
+              <Link
+                to="/domains"
                 data-testid="hero-cta-explore"
-                href="domains"
                 className="inline-flex items-center gap-2 px-6 py-3 rounded-full font-grotesk font-semibold text-base transition-all hover:scale-105 hover:shadow-xl"
                 style={{
-                  background: 'linear-gradient(135deg, rgb(24,72,82) 0%, rgb(0,140,169) 40%, rgb(24,72,82) 65%, rgb(236,51,56) 100%)',
-                  color: '#ffffff',
-                  boxShadow: '0 4px 20px rgba(236, 51, 56, 0.35)',
+                  background:
+                    "linear-gradient(135deg, rgb(24,72,82) 0%, rgb(0,140,169) 40%, rgb(24,72,82) 65%, rgb(236,51,56) 100%)",
+                  color: "#ffffff",
+                  boxShadow: "0 4px 20px rgba(236, 51, 56, 0.35)",
+                  textDecoration: "none",
                 }}
               >
                 Explore Domains
                 <ArrowUpRight size={18} />
-              </a>
-              <a
-                data-testid="hero-cta-events"
-                href="events"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-full font-grotesk font-semibold text-base transition-all hover:scale-105 hover:shadow-lg border border-[var(--c-border)]"
-                style={{ color: '#f0f4f8', background: 'rgba(255,255,255,0.05)' }}
-              >
-                View Events
-                <ArrowUpRight size={18} />
-              </a>
+              </Link>
+                <Link
+                  to="/events"
+                  data-testid="hero-cta-events"
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-full font-grotesk font-semibold text-base transition-all hover:scale-105 hover:shadow-lg border border-[var(--c-border)]"
+                  style={{
+                    color: "#f0f4f8",
+                    background: "rgba(255,255,255,0.05)",
+                    textDecoration: "none",
+                  }}
+                >
+                  View Events
+                  <ArrowUpRight size={18} />
+                </Link>
             </motion.div>
           </div>
 
