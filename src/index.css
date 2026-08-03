@@ -1,0 +1,426 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* test of stability */
+
+html, body {
+  background-color: var(--c-bg);
+  color: var(--c-fg);
+  font-family: 'Cabinet Grotesk', sans-serif;
+  overflow-x: hidden;
+  min-width: 320px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* html, body, #root {
+  height: 100%;
+} */
+/* ─── Design system tokens (light theme default) ───────────────────── */
+:root {
+  /* Page surfaces */
+  --c-bg:        #F8FAFC;
+  --c-fg:        #0F172A;
+  --c-fg-soft:   #475569;
+  --c-fg-mute:   #94A3B8;
+  --c-surface:   #FFFFFF;
+  --c-surface-2: #F1F5F9;
+  --c-surface-3: #E2E8F0;
+  --c-border:    #E2E8F0;
+
+  /* Brand colors */
+  --c-blue:      rgb(0,140,169);
+  --c-teal:      rgb(24,72,82);
+  --c-red:       rgb(236,51,56);
+
+  /* Legacy alias */
+  --c-mint:      rgb(0,140,169);
+  --c-mint-hard: rgb(0,100,125);
+  --c-mint-bg:   rgba(0,140,169,0.10);
+  --c-electric:  rgb(0,140,169);
+  --c-crimson:   rgb(236,51,56);
+  --c-cyan:      rgb(0,140,169);
+
+  /* Ink for button text on gradient/colored backgrounds */
+  --c-ink:       #FFFFFF;
+
+  /* Grid dot color */
+  --c-grid:      rgba(0,140,169,0.08);
+
+  /* Brand gradient */
+  --c-gradient:  linear-gradient(135deg, rgb(24,72,82) 0%, rgb(0,140,169) 40%, rgb(24,72,82) 65%, rgb(236,51,56) 100%);
+
+  /* Section alternation */
+  --c-sec-a:     #F8FAFC;
+  --c-sec-b:     #FFFFFF;
+  --c-sec-c:     #F1F5F9;
+
+  /* Card and Glass tokens */
+  --card-bg:     #FFFFFF;
+  --card-border: #E2E8F0;
+  --card-shadow: 0 1px 3px rgba(0,0,0,0.08), 0 4px 12px rgba(0,0,0,0.06);
+  --glass-bg:    rgba(255,255,255,0.85);
+
+  /* Tailwind dark-mode shim vars */
+  --background: 210 40% 98%;
+  --foreground: 222 47% 11%;
+  --muted: 210 40% 96%;
+  --muted-foreground: 215 16% 47%;
+  --border: 214 32% 91%;
+  --ring: 199 100% 33%;
+}
+
+/* ─── Dark theme tokens (.dark class) ────────────────────────── */
+.dark {
+  /* Page surfaces */
+  --c-bg:        #080b10;
+  --c-fg:        #f0f4f8;
+  --c-fg-soft:   #a8b4c0;
+  --c-fg-mute:   #596475;
+  --c-surface:   #0c1018;
+  --c-surface-2: #141a24;
+  --c-surface-3: #1e2634;
+  --c-border:    rgba(255,255,255,0.10);
+
+  /* Section alternation */
+  --c-sec-a:     #080b10;
+  --c-sec-b:     #0c1018;
+  --c-sec-c:     #080b10;
+
+  /* Legacy alias */
+  --c-mint-bg:   rgba(0,140,169,0.18);
+  --c-grid:      rgba(0,140,169,0.15);
+
+  /* Card and Glass tokens */
+  --card-bg:     #0c1018;
+  --card-border: rgba(255,255,255,0.10);
+  --card-shadow: 0 4px 20px rgba(0,0,0,0.45);
+  --glass-bg:    rgba(8,11,16,0.85);
+
+  --background: 220 14% 4%;
+  --foreground: 0 0% 100%;
+  --muted: 220 14% 10%;
+  --muted-foreground: 220 10% 60%;
+  --border: 220 14% 15%;
+  --ring: 199 100% 33%;
+}
+
+
+/* ─── Base reset ────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  background-color: #F8FAFC;
+  color: #0F172A;
+  scroll-behavior: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+body {
+  background-color: #F8FAFC;
+  color: #0F172A;
+  font-family: 'Cabinet Grotesk', sans-serif;
+  overflow-x: hidden;
+  min-width: 320px;
+}
+
+/* ─── Section alternation ───────────────────────────────────── */
+.sec-a { background: var(--c-sec-a); }
+.sec-b { background: var(--c-sec-b); }
+.sec-c { background: var(--c-sec-c); }
+
+/* ─── Dot Grid — visible in both modes ─────────────────────── */
+.dot-grid {
+  background-image: radial-gradient(var(--c-grid) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+.radial-mask {
+  mask-image: radial-gradient(ellipse 80% 65% at 50% 40%, #000 35%, transparent 80%);
+  -webkit-mask-image: radial-gradient(ellipse 80% 65% at 50% 40%, #000 35%, transparent 80%);
+}
+
+/* ─── Noise texture ─────────────────────────────────────────── */
+.noise::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  mix-blend-mode: overlay;
+  opacity: 0.05;
+  z-index: 0;
+}
+
+/* ─── Glass ─────────────────────────────────────────────────── */
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+}
+
+/* ─── Border helpers ────────────────────────────────────────── */
+.border-soft { border: 1px solid var(--c-border); }
+
+/* ─── Card depth ────────────────────────────────────────────── */
+.lift-card,
+.slide-card {
+  transition:
+    transform 0.35s cubic-bezier(0.22,1,0.36,1),
+    box-shadow 0.35s,
+    border-color 0.35s,
+    background-color 0.35s;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  box-shadow: var(--card-shadow);
+}
+
+/* Hover lift */
+.lift-card:hover {
+  transform: translateY(-5px) scale(1.02);
+  border-color: rgb(0,140,169) !important;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.10), 0 0 0 1px rgba(0,140,169,0.25), 0 4px 16px rgba(0,140,169,0.15);
+}
+
+.top-bar {
+  height: 3px;
+  background: var(--c-gradient) !important;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s cubic-bezier(0.22,1,0.36,1);
+  border-radius: 999px;
+}
+.lift-card:hover .top-bar { transform: scaleX(1); }
+
+.slide-card:hover { transform: translateX(4px); }
+.light .slide-card:hover {
+  box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+}
+
+/* ─── Eyebrow label — pill style in light mode ──────────────── */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'JetBrains Mono','Fira Code',monospace;
+  font-size: 11px;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--c-mint);
+  margin-bottom: 16px;
+  padding: 5px 12px 5px 10px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  transition: background 0.3s, border-color 0.3s;
+}
+.eyebrow::before {
+  content: '';
+  display: inline-block;
+  width: 16px;
+  height: 2px;
+  background: var(--c-mint);
+  border-radius: 999px;
+  flex-shrink: 0;
+}
+/* pill background only in light mode */
+.light .eyebrow {
+  background: var(--c-mint-bg);
+  border-color: rgba(13,158,92,0.22);
+}
+
+/* ─── Section heading scale ─────────────────────────────────── */
+.section-heading {
+  font-family: 'Clash Display', sans-serif;
+  font-weight: 600;
+  font-size: clamp(2.4rem, 5vw, 4.2rem);
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  color: var(--c-fg);
+}
+
+/* ─── Body text width ───────────────────────────────────────── */
+.body-text-width { max-width: 65ch; }
+
+/* ─── Caret blink ───────────────────────────────────────────── */
+@keyframes blink {
+  0%,49% { opacity: 1; }
+  50%,100% { opacity: 0; }
+}
+.caret { animation: blink 1s step-end infinite; }
+
+/* ─── Solid text accents (no transparent text gradients) ─────── */
+.text-gradient-mint {
+  color: var(--c-fg);
+}
+
+.text-accent-mint {
+  color: var(--c-mint);
+}
+
+.text-accent-electric {
+  color: var(--c-electric);
+}
+
+.underline-accent {
+  position: relative;
+  display: inline-block;
+}
+
+.underline-accent::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: var(--c-mint);
+  transform: scaleX(0.3);
+  transform-origin: left;
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.underline-accent:hover::after {
+  transform: scaleX(1);
+}
+
+/* ─── Stat cards (About) — left border accent ───────────────── */
+.slide-card {
+  border-left: 3px solid rgb(0,140,169) !important;
+  background: #F1F5F9 !important;
+}
+
+/* ─── FAQ open item highlight ───────────────────────────────── */
+.faq-item-open {
+  background: var(--c-surface-2);
+  border-radius: 12px;
+  margin: 0 -12px;
+  padding: 0 12px;
+}
+.faq-answer { overflow: hidden; }
+
+/* ─── Progress bar ──────────────────────────────────────────── */
+.progress-track {
+  height: 3px;
+  background: var(--c-border);
+  border-radius: 999px;
+  overflow: hidden;
+}
+.progress-fill {
+  height: 100%;
+  background: var(--c-mint);
+  border-radius: 999px;
+  transition: width 1.2s cubic-bezier(0.22,1,0.36,1);
+}
+
+/* ─── Gradient text gradient (already above, kept for scrollbar below) */
+
+/* ─── Scrollbar ─────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--c-border); border-radius: 999px; }
+
+/* ─── Section spacing ───────────────────────────────────────── */
+.section-pad { padding: 100px 0; }
+@media (max-width: 768px) { .section-pad { padding: 64px 0; } }
+@media (max-width: 480px) { .section-pad { padding: 48px 0; } }
+
+/* ─── Watermark numeral ─────────────────────────────────────── */
+.watermark-num {
+  font-family: 'Clash Display', sans-serif;
+  font-size: clamp(6rem, 14vw, 11rem);
+  line-height: 1;
+  font-weight: 700;
+  position: absolute;
+  background: linear-gradient(180deg, var(--c-mint), transparent 80%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  opacity: 0.10;
+  user-select: none;
+  pointer-events: none;
+}
+
+/* ─── Social card gradients ─────────────────────────────────── */
+.grad-instagram { background: linear-gradient(135deg,#f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%); }
+.grad-whatsapp  { background: linear-gradient(135deg,#25d366,#128c7e); }
+.grad-linkedin  { background: linear-gradient(135deg,#0077b5,#00a0dc); }
+
+/* ─── Trail snippets ────────────────────────────────────────── */
+.trail-snippet {
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--c-mint);
+  opacity: 0;
+  white-space: nowrap;
+  user-select: none;
+}
+
+/* ─── Nav shell ─────────────────────────────────────────────── */
+.nav-shell {
+  transition:
+    max-width 0.7s cubic-bezier(0.22,1,0.36,1),
+    border-radius 0.7s cubic-bezier(0.22,1,0.36,1),
+    background-color 0.5s, backdrop-filter 0.5s,
+    padding 0.5s cubic-bezier(0.22,1,0.36,1),
+    top 0.5s cubic-bezier(0.22,1,0.36,1),
+    border-color 0.5s;
+}
+
+/* ─── Hamburger animated lines ──────────────────────────────── */
+.ham-line {
+  display: block;
+  width: 20px;
+  height: 1.5px;
+  background: currentColor;
+  border-radius: 999px;
+  transition: transform 0.35s cubic-bezier(0.22,1,0.36,1), opacity 0.2s;
+  transform-origin: center;
+}
+.ham-open .ham-line-1 { transform: translateY(5px) rotate(45deg); }
+.ham-open .ham-line-2 { opacity: 0; transform: scaleX(0); }
+.ham-open .ham-line-3 { transform: translateY(-5px) rotate(-45deg); }
+
+/* ─── Mobile responsiveness overrides ──────────────────────── */
+@media (max-width: 640px) {
+  .section-heading { letter-spacing: -0.01em; }
+  .watermark-num   { font-size: 5rem; opacity: 0.06; }
+
+  /* Tap targets — min 44px height for all interactive elements */
+  button, a { min-height: 40px; }
+
+  /* Lift cards don't transform on touch — avoid stale hover states */
+  .lift-card:hover { transform: none; }
+  .slide-card:hover { transform: none; }
+
+  /* Hero terminal wraps gracefully */
+  .hero-terminal { flex-wrap: wrap; }
+}
+
+/* ─── Prevent text overflow on narrow viewports ─────────────── */
+h1, h2, h3 { overflow-wrap: break-word; word-break: break-word; }
+
+/* ─── Smooth color transitions on interactive elements only ──── */
+a, button {
+  transition-property: color, background-color, border-color, box-shadow, opacity, transform;
+  transition-duration: 0.2s;
+  transition-timing-function: ease;
+}
+
+/* ─── Focus visible ring ───────────────────────────── */
+:focus-visible {
+  outline: 2px solid var(--c-mint);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ─── Image rendering ─────────────────────────────── */
+img, canvas, svg { display: block; max-width: 100%; }
+
+/* ─── Safe area insets for notched devices ──────────────── */
+@supports (padding: env(safe-area-inset-bottom)) {
+  .mobile-drawer-bottom { padding-bottom: env(safe-area-inset-bottom); }
+}
