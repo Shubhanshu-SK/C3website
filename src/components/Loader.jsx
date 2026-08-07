@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useTheme } from '../context/ThemeContext';
 
 export default function Loader({ onDone }) {
   const [pct, setPct] = useState(0);
   const [visible, setVisible] = useState(true);
+  const { theme } = useTheme();
+  const isDark = theme === 'dark';
+  const logoSrc = isDark ?  '/logo.png' : '/togglelogo.png';
 
   useEffect(() => {
     const duration = 1200;
@@ -43,7 +47,7 @@ export default function Loader({ onDone }) {
             className="mb-10 select-none"
           >
             <img
-              src="/logo.png"
+              src={logoSrc}
               alt="C-Cell Logo"
               style={{ height: '72px', width: 'auto', display: 'inline-block' }}
             />

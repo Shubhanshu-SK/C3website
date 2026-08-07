@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { cn } from '@/lib/utils';
+import { useTheme } from '../context/ThemeContext';
 
 const Icons = {
   react: (
@@ -128,6 +129,9 @@ const C3_ORBITS = [
 export const SolarSystem = React.forwardRef(
   ({ centerLogo, centerLogoAlt = 'Ccell Core', orbits = C3_ORBITS, isPaused = false, speedMultiplier = 1, className, ...props }, ref) => {
     const [hoveredId, setHoveredId] = useState(null);
+    const { theme } = useTheme();
+    const isDark = theme === 'dark';
+    const logoSrc = isDark ?  '/logo.png' : '/togglelogo.png';
 
     const dustItems = [
       { delay: '-4s', radius: '165px', color: 'rgb(236,51,56)' },
@@ -215,9 +219,10 @@ export const SolarSystem = React.forwardRef(
             >
               {centerLogo ?? (
                 <img
-                  src="/logo.png"
+                  src={logoSrc}
                   alt="C-Cell Logo"
-                  style={{ height: '40px', width: 'auto', display: 'inline-block' }}
+                  draggable={false}
+                  style={{ height: '100%', width: '100%', display: 'block', objectFit: 'contain' }}
                 />
               )}
             </div>

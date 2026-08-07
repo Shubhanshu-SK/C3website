@@ -19,9 +19,9 @@ const LinkedinIcon = ({ size = 22, color = 'currentColor' }) => (
 );
 
 const SOCIALS = [
-  { id: 'instagram', name: 'Instagram', handle: '@c3.club', desc: 'Behind the scenes & announcements.', icon: InstagramIcon, gradient: 'grad-instagram', href: '#' },
-  { id: 'whatsapp', name: 'WhatsApp', handle: 'Community Group', desc: 'Join the official community for updates.', icon: MessageCircle, gradient: 'grad-whatsapp', href: '#' },
-  { id: 'linkedin', name: 'LinkedIn', handle: 'C-Cell Club', desc: 'Events, recaps, and alumni network.', icon: LinkedinIcon, gradient: 'grad-linkedin', href: '#' },
+  { id: 'instagram', name: 'Instagram', handle: 'ccellrgpv', desc: 'Behind the scenes & announcements.', icon: InstagramIcon, gradient: 'grad-instagram', href: 'https://www.instagram.com/ccellrgpv?igsh=cnd6c2RpanUwbGw3' },
+  { id: 'whatsapp', name: 'WhatsApp', handle: 'Community Group', desc: 'Join the official community for updates.', icon: MessageCircle, gradient: 'grad-whatsapp', href: 'https://chat.whatsapp.com/KaEHN8POKkKDmF2X1g0MYH?s=sw&p=a&mlu=4' },
+  // { id: 'linkedin', name: 'LinkedIn', handle: 'ccellrgpv', desc: 'Events, recaps, and alumni network.', icon: LinkedinIcon, gradient: 'grad-linkedin', href: '#' },
 ];
 
 const fadeUp = (delay = 0) => ({

@@ -17,6 +17,7 @@ export default function Footer() {
   const location = useLocation();
   const { theme } = useTheme();
   const isDark = theme === 'dark';
+  const logoSrc = isDark ? '/logo.png' : '/togglelogo.png';
 
   const handleFooterClick = (e, href) => {
     if (href.startsWith('#')) {
@@ -60,9 +61,10 @@ export default function Footer() {
           className="flex items-center gap-1 select-none shrink-0"
         >
           <img
-            src="/logo.png"
+            src={logoSrc}
             alt="C-Cell Logo"
-            style={{ height: '36px', width: 'auto', display: 'inline-block' }}
+            draggable={false}
+            style={{ height: '36px', width: 'auto', display: 'inline-block', objectFit: 'contain' }}
           />
         </Link>
 

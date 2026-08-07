@@ -32,6 +32,7 @@ function HamburgerIcon({ open }) {
 export default function Navbar() {
   const { theme, toggle } = useTheme();
   const isDark = theme === 'dark';
+  const logoSrc = isDark ? '/logo.png' : '/togglelogo.png';
   const [mobileOpen, setMobileOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(
     () => typeof window !== 'undefined' && window.innerWidth < 768
@@ -201,9 +202,10 @@ export default function Navbar() {
             }}
           >
             <img
-              src="/logo.png"
+              src={logoSrc}
               alt="C-Cell Logo"
-              style={{ height: '36px', width: 'auto', display: 'inline-block' }}
+              draggable={false}
+              style={{ height: '36px', width: 'auto', display: 'inline-block', objectFit: 'contain' }}
             />
             {/* "Club" text uses CSS variable so it updates with theme automatically */}
 
@@ -326,9 +328,10 @@ export default function Navbar() {
                   style={{ display: 'flex', alignItems: 'baseline', gap: '1px', textDecoration: 'none', userSelect: 'none' }}
                 >
                   <img
-                    src="/logo.png"
+                    src={logoSrc}
                     alt="C-Cell Logo"
-                    style={{ height: '32px', width: 'auto', display: 'inline-block' }}
+                    draggable={false}
+                    style={{ height: '32px', width: 'auto', display: 'inline-block', objectFit: 'contain' }}
                   />
                   <span style={{
                     fontFamily: "'Clash Display',sans-serif", fontSize: '1rem', fontWeight: 700,
